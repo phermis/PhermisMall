@@ -56,8 +56,8 @@
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
-import { userLogin, geetest } from '/api/index.js'
-import { addCart } from '/api/goods.js'
+import { geetest } from '/api/index.js'
+// import { addCart } from '/api/goods.js'
 import { setStore, getStore, removeStore } from '/utils/storage.js'
 require('../../../static/geetest/gt.js')
 var captcha
@@ -162,42 +162,7 @@ export default {
         this.logintxt = '登录'
         return false
       }
-      var params = {
-        userName: this.ruleForm.userName,
-        userPwd: this.ruleForm.userPwd,
-        challenge: result.geetest_challenge,
-        validate: result.geetest_validate,
-        seccode: result.geetest_seccode,
-        statusKey: this.statusKey
-      }
-      userLogin(params).then(res => {
-        if (res.result.state === 1) {
-          setStore('token', res.result.token)
-          setStore('userId', res.result.id)
-          // 登录后添加当前缓存中的购物车
-          if (this.cart.length) {
-            for (var i = 0; i < this.cart.length; i++) {
-              addCart(this.cart[i]).then(res => {
-                if (res.success === true) {
-                }
-              })
-            }
-            removeStore('buyCart')
-            this.$router.push({
-              path: '/'
-            })
-          } else {
-            this.$router.push({
-              path: '/'
-            })
-          }
-        } else {
-          this.logintxt = '登录'
-          this.message(res.result.message)
-          captcha.reset()
-          return false
-        }
-      })
+      this.$router.push({path: '/'})
     },
     init_geetest () {
       geetest().then(res => {

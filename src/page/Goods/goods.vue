@@ -70,12 +70,17 @@
   export default {
     data () {
       return {
-        goods: [],
+        goods: [{
+          productId: 1,
+          productName: '华为',
+          salePrice: 3000,
+          productImageBig: 'https://res.vmallres.com/pimages//product/6901443280988/428_428_1545877216682mp.png'
+        }],
         noResult: false,
         error: false,
         min: '',
         max: '',
-        loading: true,
+        loading: false,
         timer: null,
         sortType: 1,
         windowHeight: null,
@@ -83,7 +88,7 @@
         recommendPanel: [],
         sort: '',
         currentPage: 1,
-        total: 0,
+        total: 1,
         pageSize: 20
       }
     },
@@ -117,17 +122,29 @@
           }
         }
         getAllGoods(params).then(res => {
-          if (res.success === true) {
-            this.total = res.result.total
-            this.goods = res.result.data
-            this.noResult = false
-            if (this.total === 0) {
-              this.noResult = true
-            }
-            this.error = false
-          } else {
-            this.error = true
+          this.total = 1
+          this.goods = [{
+            productId: 1,
+            productName: '华为',
+            salePrice: 3000,
+            productImageBig: 'https://res.vmallres.com/pimages//product/6901443280988/428_428_1545877216682mp.png'
+          }]
+          this.noResult = false
+          if (this.total === 0) {
+            this.noResult = true
           }
+          this.error = false
+          // if (res.success === true) {
+          //   this.total = res.result.total
+          //   this.goods = res.result.data
+          //   this.noResult = false
+          //   if (this.total === 0) {
+          //     this.noResult = true
+          //   }
+          //   this.error = false
+          // } else {
+          //   this.error = true
+          // }
           this.loading = false
         })
       },

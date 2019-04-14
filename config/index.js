@@ -29,17 +29,12 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/member/*': {
-        target: 'http://127.0.0.1:7777'  // 请求本地 需要xmall后台项目 默认127.0.0.1:7777 
+        target: 'http://127.0.0.1:9999'  //请求本地
       },
       '/goods/*': {
-        target: 'http://127.0.0.1:7777'  // 请求本地 需要xmall后台项目 默认127.0.0.1:7777
+        target: 'http://127.0.0.1:9999'  //请求本地
       }
     },
-    // CSS Sourcemaps off by default because relative paths are "buggy"
-    // with this option, according to the CSS-Loader README
-    // (https://github.com/webpack/css-loader#sourcemaps)
-    // In our experience, they generally work as expected,
-    // just be aware of this issue when enabling this option.
     cssSourceMap: false
   }
 }

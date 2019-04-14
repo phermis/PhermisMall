@@ -83,7 +83,13 @@
     data () {
       return {
         error: false,
-        banner: [],
+        banner: [{
+          picUrl: 'https://res.vmallres.com/pimages//sale/2019-04/NrI3vXtxMdgSUmGGx5qH.jpg'
+        }, {
+          picUrl: 'https://res.vmallres.com/pimages//sale/2019-04/TZ0Pjan6UP8kVe6WXMZ3.jpg'
+        }, {
+          picUrl: 'https://res.vmallres.com/pimages//sale/2019-04/cqcpviqd91LuE8HWdYc0.jpg'
+        }],
         mark: 0,
         bgOpt: {
           px: 0,
@@ -92,7 +98,7 @@
           h: 0
         },
         home: [],
-        loading: true,
+        loading: false,
         notify: '1',
         dialogVisible: false,
         timer: ''
