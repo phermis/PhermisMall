@@ -1,7 +1,7 @@
 import http from './public'
 // 商品列表
 export const getAllGoods = (params) => {
-  return http.fetchGet('/goods/allGoods', params)
+  return http.fetchGet('/static/mock/allGoods.json', params)
 }
 // 获取购物车列表
 export const getCartList = (params) => {

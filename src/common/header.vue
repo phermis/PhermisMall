@@ -5,7 +5,7 @@
         <div class="w-box">
           <div class="nav-logo">
             <h1 @click="changePage(-1)">
-              <router-link to="/" title="XMall商城官网">XMall商城</router-link>
+              <router-link to="/" title="PhermisMall商城官网">PhermisMall商城</router-link>
             </h1>
           </div>
           <div class="right-box">
@@ -22,12 +22,6 @@
                 @keydown.enter.native="handleIconClick">
               </el-autocomplete>
               <router-link to="/goods"><a @click="changePage(2)">全部商品</a></router-link>
-              <router-link to="/thanks"><a @click="changePage(4)">捐赠</a></router-link>
-              <!-- <router-link to="/">Smartisan M1 / M1L</router-link>
-              <router-link to="/">Smartisan OS</router-link>
-              <router-link to="/">欢喜云</router-link>
-              <router-link to="/">应用下载</router-link>
-              <router-link to="/">官方论坛</router-link> -->
             </div>
             <div class="nav-aside" ref="aside" :class="{fixed:st}">
               <div class="user pr">
@@ -133,7 +127,7 @@
                   <router-link to="/"><a @click="changGoods(-1)" :class="{active:choosePage===-1}">首页</a></router-link>
                 </li>
                 <li>
-                  <a @click="changGoods(-2)" :class="{active:choosePage===-2}">全部</a>
+                  <a @click="changGoods(-2)" :class="{active:choosePage===-2}">全部商品</a>
                 </li>
                 <li v-for="(item,i) in navList" :key="i">
                   <a @click="changGoods(i, item)" :class="{active:i===choosePage}">{{item.picUrl}}</a>
@@ -322,7 +316,7 @@
       },
       // 控制顶部
       navFixed () {
-        if (this.$route.path === '/goods' || this.$route.path === '/home' || this.$route.path === '/goodsDetails' || this.$route.path === '/thanks') {
+        if (this.$route.path === '/goods' || this.$route.path === '/home' || this.$route.path === '/goodsDetails') {
           var st = document.documentElement.scrollTop || document.body.scrollTop
           st >= 100 ? this.st = true : this.st = false
           // 计算小圆当前位置
@@ -493,12 +487,13 @@
       display: flex;
       align-items: center;
       > a {
-        background: url(/static/images/global-logo-red@2x.png) no-repeat 50%;
-        background-size: cover;
+        background: url(/static/images/phermis.png) no-repeat 100%;
+        background-size: 100%;
         display: block;
-        @include wh(50px, 40px);
+        @include wh(50px, 50px);
         text-indent: -9999px;
         background-position: 0 0;
+        border-radius: 100%;
       }
     }
     .nav-list {

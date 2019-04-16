@@ -1,0 +1,25 @@
+{
+    "success":true,
+    "message":"success",
+    "code":200,
+    "timestamp":1555380459601,
+    "result":[
+        // {
+        //     "id":55,
+        //     "panelId":0,
+        //     "type":1,
+        //     "productId":null,
+        //     "sortOrder":1,
+        //     "fullUrl":"http://xmall.exrick.cn/#/goods?cid=1184",
+        //     "picUrl":"品牌周边",
+        //     "picUrl2":null,
+        //     "picUrl3":null,
+        //     "created":1532695701000,
+        //     "updated":1532701971000,
+        //     "salePrice":null,
+        //     "productName":null,
+        //     "subTitle":null,
+        //     "productImageBig":"品牌周边"
+        // }
+    ]
+}

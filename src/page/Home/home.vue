@@ -60,17 +60,6 @@
         <br> 抱歉！出错了...
       </div>
     </div>
-
-    <el-dialog
-      title="通知"
-      :visible.sync="dialogVisible"
-      width="30%"
-      style="width:70%;margin:0 auto">
-      <span>首页已升级！XPay个人支付收款系统已上线，赶快去支付体验吧！</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false">知道了</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 <script>
@@ -83,13 +72,7 @@
     data () {
       return {
         error: false,
-        banner: [{
-          picUrl: 'https://res.vmallres.com/pimages//sale/2019-04/NrI3vXtxMdgSUmGGx5qH.jpg'
-        }, {
-          picUrl: 'https://res.vmallres.com/pimages//sale/2019-04/TZ0Pjan6UP8kVe6WXMZ3.jpg'
-        }, {
-          picUrl: 'https://res.vmallres.com/pimages//sale/2019-04/cqcpviqd91LuE8HWdYc0.jpg'
-        }],
+        banner: [],
         mark: 0,
         bgOpt: {
           px: 0,

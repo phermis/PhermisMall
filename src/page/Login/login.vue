@@ -3,7 +3,8 @@
     <div class="wrapper">
       <div class="dialog dialog-shadow" style="display: block; margin-top: -362px;">
         <div class="title">
-          <h4>使用 XMall 账号 登录官网</h4>
+          <div class="head_img"></div>
+          <h4>使用 PhermisMall 账号 登录官网</h4>
         </div>
         <div v-if="loginPage" class="content">
           <ul class="common-form">
@@ -17,16 +18,11 @@
                 <input type="password" v-model="ruleForm.userPwd" @keyup.enter="login" placeholder="密码">
               </div>
             </li>
-            <li>
-              <div id="captcha">
-                <p id="wait">正在加载验证码...</p>
-              </div>
-            </li>
             <li style="text-align: right" class="pr">
               <el-checkbox class="auto-login" v-model="autoLogin">记住密码</el-checkbox>
               <!-- <span class="pa" style="top: 0;left: 0;color: #d44d44">{{ruleForm.errMsg}}</span> -->
-              <a href="javascript:;" class="register" @click="toRegister">注册 XMall 账号</a>
-              <a style="padding: 1px 0 0 10px" @click="open('找回密码','请联系作者邮箱找回密码或使用测试账号登录：test | test')">忘记密码 ?</a>
+              <a href="javascript:;" class="register" @click="toRegister">注册 PhermisMall 账号</a>
+              <a style="padding: 1px 0 0 10px" @click="open('找回密码','找回密码测试')">忘记密码</a>
             </li>
           </ul>
           <!--登陆-->
@@ -52,15 +48,10 @@
     </div>
   </div>
 </template>
-<script src="../../../static/geetest/gt.js"></script>
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
-import { geetest } from '/api/index.js'
-// import { addCart } from '/api/goods.js'
 import { setStore, getStore, removeStore } from '/utils/storage.js'
-require('../../../static/geetest/gt.js')
-var captcha
 export default {
   data () {
     return {
@@ -152,43 +143,23 @@ export default {
       this.logintxt = '登录中...'
       this.rememberPass()
       if (!this.ruleForm.userName || !this.ruleForm.userPwd) {
-        // this.ruleForm.errMsg = '账号或者密码不能为空!'
+        this.ruleForm.errMsg = '账号或者密码不能为空!'
         this.message('账号或者密码不能为空!')
         return false
       }
-      var result = captcha.getValidate()
-      if (!result) {
-        this.message('请完成验证')
-        this.logintxt = '登录'
+      if (!(this.ruleForm.userName === 'phermis' && this.ruleForm.userPwd === 'pass1234')) {
+        this.ruleForm.errMsg = '账号或者密码错误!'
+        this.message('账号或者密码错误!')
         return false
       }
+      this.logintxt = '登录'
       this.$router.push({path: '/'})
-    },
-    init_geetest () {
-      geetest().then(res => {
-        this.statusKey = res.statusKey
-        window.initGeetest({
-          gt: res.gt,
-          challenge: res.challenge,
-          new_captcha: res.new_captcha,
-          offline: !res.success,
-          product: 'popup',
-          width: '100%'
-        }, function (captchaObj) {
-          captcha = captchaObj
-          captchaObj.appendTo('#captcha')
-          captchaObj.onReady(function () {
-            document.getElementById('wait').style.display = 'none'
-          })
-        })
-      })
     }
   },
   mounted () {
     this.getRemembered()
     this.login_addCart()
-    this.init_geetest()
-    this.open('登录提示', '测试体验账号密码：test | test')
+    this.open('登录提示', '测试体验账号密码：phermis | pass1234')
   },
   components: {
     YFooter,
@@ -235,19 +206,30 @@ export default {
   margin-left: -225px;
   position: absolute;
   .title {
-    background: linear-gradient(#fff, #f5f5f5);
+    // background: linear-gradient(#fff, #f5f5f5);
     height: auto;
     overflow: visible;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     position: relative;
-    background-image: url(/static/images/smartisan_4ada7fecea.png);
-    background-size: 140px;
-    background-position: top center;
-    background-repeat: no-repeat;
+    // background-image: url(/static/images/phermis.png);
+    // background-size: 140px;
+    // background-position: top center;
+    // background-repeat: no-repeat;
+
     height: 92px;
     margin: 23px 0 50px;
-    padding: 75px 0 0;
+    // padding: 75px 0 0;
     box-shadow: none;
+    .head_img {
+      width: 100px;
+      height: 100px;
+      background-image: url(/static/images/phermis.png);
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      border-radius: 100%;
+      margin: 0 auto;
+    }
     h4 {
       padding: 0;
       text-align: center;
@@ -258,7 +240,7 @@ export default {
       box-shadow: none;
       font-weight: 700;
       position: absolute;
-      bottom: 0;
+      bottom: -35px;
       width: 100%;
       text-align: center;
       margin: 0;
