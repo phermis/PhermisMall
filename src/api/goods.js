@@ -1,6 +1,7 @@
 import http from './public'
 // 商品列表
 export const getAllGoods = (params) => {
+  // return http.fetchGet('/static/mock/allGoods.json', params)
   return http.fetchGet('/static/mock/allGoods.json', params)
 }
 // 获取购物车列表
@@ -71,21 +72,16 @@ export const getOrderDet = (params) => {
 export const cancelOrder = (params) => {
   return http.fetchPost('/member/cancelOrder', params)
 }
-// 商品详情
-export const productDet = (params) => {
-  debugger
-  let allGoods = http.fetchGet('/static/mock/allGoods.json', params)
-  let goodsTemplate = http.fetchGet('/static/mock/goods.json', params)
-  Promise.resolve(allGoods.result.data.forEach(goods => {
-    if (goods.productId === params) {
-      goodsTemplate.result.salePrice = goods.salePrice
-      goodsTemplate.result.productName = goods.productName
-      goodsTemplate.result.subTitle = goods.subTitle
-      goodsTemplate.result.productImageBig = goods.productImageBig
-    }
-  }))
-  return goodsTemplate
+
+export const goodsTemplate = () => {
+  return http.fetchGet('/static/mock/goods.json')
 }
+
+// 商品详情
+export const productDet = () => {
+  return http.fetchGet('/static/mock/allGoods.json')
+}
+
 // 删除订单
 export const delOrder = (params) => {
   return http.fetchGet('/member/delOrder', params)

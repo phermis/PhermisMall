@@ -74,7 +74,8 @@
         small: [],
         big: '',
         product: {
-          salePrice: 0
+          salePrice: 0,
+          limitNum: 100
         },
         productNum: 1,
         userId: ''
@@ -87,11 +88,16 @@
       ...mapMutations(['ADD_CART', 'ADD_ANIMATION', 'SHOW_CART']),
       _productDet (productId) {
         productDet({params: {productId}}).then(res => {
-          let result = res.result
-          this.product = result
-          this.productMsg = result.detail || ''
-          this.small = result.productImageSmall
-          this.big = this.small[0]
+          res.result.data.forEach(goods => {
+            if (goods.productId === parseInt(productId)) {
+              this.product.salePrice = goods.salePrice
+              this.product.productName = goods.productName
+              this.product.subTitle = goods.subTitle
+              this.product.productImageBig = goods.productImageBig
+              this.big = goods.productImageBig
+              this.productMsg = goods.productName + goods.subTitle
+            }
+          })
         })
       },
       addCart (id, price, name, img) {

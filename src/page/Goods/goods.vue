@@ -70,17 +70,12 @@
   export default {
     data () {
       return {
-        goods: [{
-          productId: 1,
-          productName: '华为',
-          salePrice: 3000,
-          productImageBig: 'https://res.vmallres.com/pimages//product/6901443280988/428_428_1545877216682mp.png'
-        }],
+        goods: [],
         noResult: false,
         error: false,
         min: '',
         max: '',
-        loading: false,
+        loading: true,
         timer: null,
         sortType: 1,
         windowHeight: null,
@@ -99,6 +94,7 @@
         this.loading = true
       },
       handleCurrentChange (val) {
+        debugger
         this.currentPage = val
         this._getAllGoods()
         this.loading = true
@@ -122,29 +118,22 @@
           }
         }
         getAllGoods(params).then(res => {
-          this.total = 1
-          this.goods = [{
-            productId: 1,
-            productName: '华为',
-            salePrice: 3000,
-            productImageBig: 'https://res.vmallres.com/pimages//product/6901443280988/428_428_1545877216682mp.png'
-          }]
-          this.noResult = false
-          if (this.total === 0) {
-            this.noResult = true
+          this.goods.splice(0, this.goods.length)
+          if (res.success === true) {
+            this.total = res.result.total
+            res.result.data.forEach((p, index) => {
+              if (index < (this.pageSize * this.currentPage) && index >= ((this.currentPage - 1) * this.pageSize)) {
+                this.goods.push(p)
+              }
+            })
+            this.noResult = false
+            if (this.total === 0) {
+              this.noResult = true
+            }
+            this.error = false
+          } else {
+            this.error = true
           }
-          this.error = false
-          // if (res.success === true) {
-          //   this.total = res.result.total
-          //   this.goods = res.result.data
-          //   this.noResult = false
-          //   if (this.total === 0) {
-          //     this.noResult = true
-          //   }
-          //   this.error = false
-          // } else {
-          //   this.error = true
-          // }
           this.loading = false
         })
       },
